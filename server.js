@@ -21,9 +21,9 @@ const dataBaseConnect = async () => {
     try {
         await client.connect()
         const dataBaseName = client.db('database')
-        const collection = dataBaseName.collection("database")
-        const dataBaseItensAdd = await collection.insertMany([{ a: 1 }, { a: 2 }, { a: 3 }])
-        console.log(dataBaseItensAdd);
+        const collection = dataBaseName.collection("database") 
+        // const dataBaseItensAdd = await collection.insertMany([{ a: 1 }, { a: 2 }, { a: 3 }, {b: 124} ])
+        collection.drop()
     } catch (error) {
         console.error("error connect database")
     }
