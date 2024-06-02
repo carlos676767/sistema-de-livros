@@ -35,6 +35,8 @@ const dataBaseConnect = async (dados) => {
     }
 }
 
+
+
 expressApi.get("/dados:dadoshttp", (req, response) => {
     try {
         response.send({ status: "OK", msg: "the connection was successful" });
@@ -51,8 +53,8 @@ async function buscarLivro(dados) {
         await client.connect()
         const dataBaseName = client.db('database')
         const collection = dataBaseName.collection("database")
-        const searchName = await collection.findOne({tituloLivro: dados})
-   console.log(searchName);
+        const searchName = await collection.findOne({ tituloLivro: dados })
+        console.log(searchName);
     } catch (error) {
         console.error("error connect database")
     } finally {

@@ -12,12 +12,19 @@ header {
     color: white;
     text-align: center;
     padding: 1rem 0;
+    width: 100%;
+    position: relative;
+   position: absolute;
+   left: 0;
+   right: 0;
+   top: 0;
 }
 
 main {
     display: flex;
     justify-content: space-around;
     padding: 2rem;
+    margin-top: 500px;
 }
 
 section {
@@ -26,6 +33,7 @@ section {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     width: 45%;
+    margin-left:30px ;
 }
 
 form label {
@@ -57,6 +65,7 @@ form button:hover {
 
 #search-bar {
     display: flex;
+    flex-direction: column;
     margin-bottom: 1rem;
 }
 
@@ -74,6 +83,7 @@ form button:hover {
     color: white;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
+    
 }
 
 #search-bar button:hover {
@@ -86,6 +96,7 @@ form button:hover {
 }
 
 .book {
+    
     border: 1px solid #ccc;
     border-radius: 5px;
     margin: 1rem;
@@ -122,5 +133,46 @@ form button:hover {
 
 .book .view-button:hover {
     background: #00e;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.alert {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card {
+    width: 300px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    padding: 20px;
+}
+.card img {
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.card h2 {
+    margin-top: 0;
+}
+.card p {
+    margin: 5px 0;
+}
+.card a {
+    text-decoration: none;
+    color: #007bff;
 }
 

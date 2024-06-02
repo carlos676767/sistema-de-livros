@@ -1,4 +1,6 @@
 
+
+
 const title = document.getElementById("title")
 const author = document.getElementById("author")
 const publisher = document.getElementById("publisher")
@@ -7,6 +9,21 @@ const capa = document.getElementById("cover-url")
 const sinopse = document.getElementById("synopsis")
 
 async function cadastrarLivros() {
+    const array = []
+    array.push(title.value, author.value, publisher.value, pages.value, capa.value, sinopse.value)
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] =="") {
+          alert("vazio")
+          return
+        }else{
+            httpRequestLivrosPost()
+        }
+    }
+}
+
+
+
+const httpRequestLivrosPost = async () => {
     const dadosEnviar = {
         tituloLivro: title.value,
         autorLivro: author.value,
@@ -15,7 +32,6 @@ async function cadastrarLivros() {
         capaLivro: capa.value,
         sinopseLivro: sinopse.value
     }
-
     try {
         const httpRequest = await fetch("http://localhost:8080/cadastro", {
             method: 'POST',
@@ -31,6 +47,8 @@ async function cadastrarLivros() {
     }
 }
 
+
+
 const addlivro = document.querySelector(".addlivro")
 addlivro.addEventListener("click", () => {
     cadastrarLivros()
@@ -38,7 +56,6 @@ addlivro.addEventListener("click", () => {
 
 
 const livroButtom = document.getElementById("search-button")
-
 const buscarDados = async (callback) => {
     const searchInput = document.getElementById("search-input")
     try {
