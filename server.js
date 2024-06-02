@@ -6,8 +6,6 @@ const bodyParser = require('body-parser')
 const expressApi = express()
 expressApi.use(bodyParser.json())
 
-
-
 expressApi.post("/cadastro", (req, resposta) => {
     try {
         resposta.send({ status: "OK", msg: "livro cadastrado" });
@@ -18,6 +16,7 @@ expressApi.post("/cadastro", (req, resposta) => {
         resposta.status(500).send({ error: "Internal Server Error", status: 500 });
     }
 })
+
 
 const url = `mongodb+srv://admin:${process.env.DATABASE_PASS}@dados.7d94myt.mongodb.net/?retryWrites=true&w=majority&appName=dados`
 const client = new MongoClient(url);
@@ -30,18 +29,22 @@ const dataBaseConnect = async (dados) => {
     } catch (error) {
         console.error("error connect database")
     } finally {
-        client.close()
+        setTimeout(() => {
+            client.close()
+        }, 10000);
     }
 }
 
-expressApi.get("/dados", (req, response) => {
+expressApi.get("/dados:dadoshttp", (req, response) => {
     try {
         response.send({ status: "OK", msg: "the connection was successful" });
-        console.log(req.body);
+        const dadosHttpGet = req.params.dadoshttp.slice(1, Infinity)
+        console.log(dadosHttpGet);
     } catch (error) {
         response.status(500).send({ error: "Internal Server Error", status: 500 });
     }
 });
+
 
 async function buscarLivro(dados) {
     try {
