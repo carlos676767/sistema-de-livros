@@ -39,7 +39,7 @@ expressApi.get("/dados:dadoshttp", (req, response) => {
     try {
         response.send({ status: "OK", msg: "the connection was successful" });
         const dadosHttpGet = req.params.dadoshttp.slice(1, Infinity)
-        console.log(dadosHttpGet);
+        buscarLivro(dadosHttpGet)
     } catch (error) {
         response.status(500).send({ error: "Internal Server Error", status: 500 });
     }
@@ -51,7 +51,8 @@ async function buscarLivro(dados) {
         await client.connect()
         const dataBaseName = client.db('database')
         const collection = dataBaseName.collection("database")
-        collection.insertOne(dados)
+        const searchName = await collection.findOne({tituloLivro: dados})
+   console.log(searchName);
     } catch (error) {
         console.error("error connect database")
     } finally {
