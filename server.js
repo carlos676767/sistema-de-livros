@@ -41,10 +41,9 @@ expressApi.get("/dados:dadoshttp", (req, response) => {
     try {
         const dadosHttpGet = req.params.dadoshttp.slice(1, Infinity)
         const dados = buscarLivro(dadosHttpGet)
-        dados.then((data)=> {
+        dados.then((data) => {
             response.send({ status: "OK", msg: "dados consultados com sucesso.", dados: data });
         })
-        
     } catch (error) {
         response.status(500).send({ error: "Internal Server Error", status: 500 });
     }

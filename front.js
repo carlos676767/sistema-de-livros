@@ -54,16 +54,17 @@ addlivro.addEventListener("click", () => {
 
 
 const livroButtom = document.getElementById("search-button")
-const buscarDados = async (callback) => {
+const buscarDados = async () => {
     const searchInput = document.getElementById("search-input")
     try {
-       const httpGet = await fetch(`http://localhost:8080/dados:${searchInput.value}`)
-       const dados = await httpGet.json()
-       console.log(dados);
+        const httpGet = await fetch(`http://localhost:8080/dados:${searchInput.value}`)
+        const dados = await httpGet.json()
+        console.log(dados);
     } catch (error) {
         console.log(error);
     }
 }
+
 
 livroButtom.addEventListener("click", () => {
     buscarDados()
