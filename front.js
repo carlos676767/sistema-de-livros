@@ -21,8 +21,6 @@ async function cadastrarLivros() {
     }
 }
 
-
-
 const httpRequestLivrosPost = async () => {
     const dadosEnviar = {
         tituloLivro: title.value,
