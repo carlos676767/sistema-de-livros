@@ -60,11 +60,19 @@ const buscarDados = async () => {
         const httpGet = await fetch(`http://localhost:8080/dados:${searchInput.value}`)
         const dados = await httpGet.json()
         console.log(dados);
+        const { autorLivro, capaLivro, editora, paginas, tituloLivro } = dados.dados
+        mostrarDadosHtml(capaLivro,tituloLivro )
     } catch (error) {
         console.log(error);
     }
 }
 
+const mostrarDadosHtml = (imagem, titulo) => {
+    const img = document.querySelector("img")
+    img.src = imagem
+    const h2 = document.querySelectorAll("h2")[2]
+    h2.innerHTML = titulo
+}
 
 livroButtom.addEventListener("click", () => {
     buscarDados()
