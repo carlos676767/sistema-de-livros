@@ -61,17 +61,21 @@ const buscarDados = async () => {
         const dados = await httpGet.json()
         console.log(dados);
         const { autorLivro, capaLivro, editora, paginas, tituloLivro } = dados.dados
-        mostrarDadosHtml(capaLivro,tituloLivro )
+        mostrarDadosHtml(capaLivro,tituloLivro, autorLivro, editora )
     } catch (error) {
         console.log(error);
     }
 }
 
-const mostrarDadosHtml = (imagem, titulo) => {
+const mostrarDadosHtml = (imagem, titulo, autor, editor) => {
     const img = document.querySelector("img")
-    img.src = imagem
     const h2 = document.querySelectorAll("h2")[2]
+    const autoMostrar = document.getElementById("autoMostrar")
+    const editora = document.getElementById("editoraMostrar")
+    img.src = imagem
     h2.innerHTML = titulo
+    autoMostrar.innerHTML = `Autor: ${autor}`
+    editora.innerHTML = `Editora: ${editor}`
 }
 
 livroButtom.addEventListener("click", () => {
