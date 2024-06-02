@@ -2,10 +2,10 @@
 const express = require("express")
 const { MongoClient } = require("mongodb");
 require('dotenv').config()
-
+const  bodyParser = require('body-parser')
 const expressApi = express()
+expressApi.use(bodyParser.json())
 
-//get router
 expressApi.get("/dados", (req, response) => {
     try {
         response.send({ status: "OK", msg: "the connection was successful" });
@@ -17,7 +17,8 @@ expressApi.get("/dados", (req, response) => {
 expressApi.post("/cadastro", (req, resposta) =>{
     try {
         resposta.send({ status: "OK", msg: "livro cadastrado" });
-        console.log(req.body);
+        const reqOk = req.body
+        console.log(reqOk);
     } catch (error) {
         resposta.status(500).send({ error: "Internal Server Error", status: 500 });
     }
@@ -38,7 +39,7 @@ const dataBaseConnect = async () => {
 }
 
 // dataBaseConnect()
-const port = 8070
+const port = 8080
 expressApi.listen(port, () => {
     console.log(`Server running on the port ${port}...`);
 })
