@@ -15,13 +15,13 @@ async function cadastrarLivros() {
         capaLivro: capa.value,
         sinopseLivro: sinopse.value
     }
-    
+
     try {
         const httpRequest = await fetch("http://localhost:8080/cadastro", {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json' 
-            },  
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(dadosEnviar)
         })
         const dados = await httpRequest.json()
@@ -32,8 +32,25 @@ async function cadastrarLivros() {
 }
 
 const addlivro = document.querySelector(".addlivro")
-
-
 addlivro.addEventListener("click", () => {
     cadastrarLivros()
+})
+
+
+const livroButtom = document.getElementById("search-button")
+
+
+const buscarDados = async (callback) => {
+    const searchInput = document.getElementById("search-input")
+    try {
+        const dados = await fetch(`http://localhost:8080/dados?q=${searchInput.value}`)
+        const data = await dados.json()
+        console.log(data);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+livroButtom.addEventListener("click", () => {
+    buscarDados()
 })
