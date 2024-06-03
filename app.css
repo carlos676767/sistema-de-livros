@@ -1,31 +1,79 @@
 /* styles.css */
 
+
+
+
+ 
+
+
+.custom-navbar {
+    background-color: #759eff !important;
+}
+
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link,
+.custom-navbar .navbar-toggler-icon {
+    color: #ffffff !important;
+}
+
+.custom-navbar .nav-link:hover {
+    color: #cccccc !important; 
+}
+
+.custom-navbar .dropdown-menu {
+    background-color: #759eff !important;
+}
+
+.custom-navbar .dropdown-item {
+    color: #ffffff !important; 
+}
+
+.custom-navbar .dropdown-item:hover {
+    background-color: #5670b5 !important;
+}
+
+
+
+
 body {
+    display: grid;
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
+    grid-gap: 1rem;
+    grid-template-areas:
+      "header header header"
+      "aside main main"
+      "footer footer footer";
 
-header {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 1rem 0;
+ 
+  }
+  
+  header {
+    grid-area: header;
+    padding: 1.5rem;
+  }
+  
+  aside {
+    grid-area: aside;
+    background-color:#759eff ;
     width: 100%;
-    position: relative;
-   position: absolute;
-   left: 0;
-   right: 0;
-   top: 0;
-}
+    height: auto;
 
-main {
+  }
+  
+  main {
+    grid-area: main;
     display: flex;
     justify-content: space-around;
     padding: 2rem;
-    margin-top: 500px;
-}
+ 
+  }
+  
+  footer {
+    grid-area: footer;
+    padding: 1rem;
+  }
+  
+ 
 
 section {
     background: white;
@@ -134,14 +182,6 @@ form button:hover {
     background: #00e;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
 
 .alert {
     background-color: #4CAF50;
@@ -167,6 +207,12 @@ body {
 }
 .card h2 {
     margin-top: 0;
+   
+
+}
+
+.addlivro, label{
+   color: white;
 }
 .card p {
     margin: 5px 0;
@@ -177,7 +223,7 @@ body {
 }
 
 #chat-container {
-    width: 400px;
+
     max-width: 100%;
     background-color: #fff;
     border-radius: 8px;
@@ -223,6 +269,10 @@ body {
     max-width: 80%;
 }
 
+.logo{
+    width: 300px;
+}
+
 .bot-message {
     background-color: #e2e2e2;
     align-self: flex-start;
@@ -253,3 +303,9 @@ body {
 
 }
 
+
+#add-book-section{
+    width: 90%;
+    margin-top: 70px;
+    background-color: #759eff ;
+}

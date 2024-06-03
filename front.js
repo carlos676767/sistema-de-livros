@@ -68,14 +68,15 @@ const buscarDados = async () => {
 }
 
 const mostrarDadosHtml = (imagem, titulo, autor, editor, qtdpaginas, Sinopse) => {
-    const img = document.querySelector("img")
-    const h2 = document.querySelectorAll("h2")[2]
+    const img = document.querySelector(".imgLivro")
+    const h2 = document.querySelector(".titleLivro")
+    console.log(h2);
     const autoMostrar = document.getElementById("autoMostrar")
     const editora = document.getElementById("editoraMostrar")
     const quantidadepaginas = document.getElementById("quantidadepaginas")
     const sinopseLivro = document.getElementById("sinopseLivro")
     img.src = imagem
-    h2.innerHTML = titulo
+    h2.innerHTML = `${titulo}`
     autoMostrar.innerHTML = `Autor: ${autor}`
     editora.innerHTML = `Editora: ${editor}`
     quantidadepaginas.innerHTML = `Quantidade de Páginas: ${qtdpaginas}`
@@ -92,6 +93,7 @@ const chatBotApiRecomendarLivros = async() => {
         
     }
 }
+
 
 
 livroButtom.addEventListener("click", () => {
