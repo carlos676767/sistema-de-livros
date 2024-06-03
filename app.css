@@ -46,6 +46,8 @@ body {
 
  
   }
+
+
   
   header {
     grid-area: header;
@@ -60,13 +62,7 @@ body {
 
   }
   
-  main {
-    grid-area: main;
-    display: flex;
-    justify-content: space-around;
-    padding: 2rem;
- 
-  }
+
   
   footer {
     grid-area: footer;
@@ -74,7 +70,6 @@ body {
   }
   
  
-
 section {
     background: white;
     padding: 1rem;
@@ -84,12 +79,12 @@ section {
     margin-left:30px ;
 }
 
-form label {
+#book-form label {
     display: block;
     margin-top: 1rem;
 }
 
-form input, form textarea {
+#book-form input, #book-form textarea {
     width: 100%;
     padding: 0.5rem;
     margin-top: 0.5rem;
@@ -97,19 +92,18 @@ form input, form textarea {
     border-radius: 5px;
 }
 
-form button {
+#book-form button {
     margin-top: 1rem;
     padding: 0.5rem 1rem;
     border: none;
-    background: #333;
-    color: white;
+    color: #759eff;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
+    border: 2px solid #759eff;
 }
 
-form button:hover {
-    background: #555;
-}
+
 
 #search-bar {
     display: flex;
@@ -124,24 +118,29 @@ form button:hover {
     border-radius: 5px 0 0 5px;
 }
 
-#search-bar button {
-    padding: 0.5rem;
-    border: none;
-    background: #333;
-    color: white;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-    
-}
 
-#search-bar button:hover {
-    background: #555;
-}
+
+
 
 #library {
     display: flex;
-    flex-wrap: wrap;
+  
 }
+
+main{
+    display: flex;
+  
+}
+
+.list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 70px;
+}
+
+
 
 .book {
     border: 1px solid #ccc;
@@ -160,19 +159,8 @@ form button:hover {
     margin-bottom: 1rem;
 }
 
-.book button {
-    margin-top: 1rem;
-    padding: 0.5rem;
-    border: none;
-    background: #c00;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
-.book button:hover {
-    background: #e00;
-}
+
 
 .book .view-button {
     background: #00c;
@@ -181,6 +169,55 @@ form button:hover {
 .book .view-button:hover {
     background: #00e;
 }
+
+span{
+    color: #007bff;
+}
+
+input::placeholder{
+    color: rebeccapurple;
+}
+
+
+.dark-mode-toggle input[type="checkbox"] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+  }
+  
+  .toggle-label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 40px;
+    height: 20px;
+    background: grey;
+    display: block;
+    border-radius: 20px;
+    position: relative;
+  }
+  
+  .toggle-label:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.3s;
+  }
+  
+  .dark-mode-toggle input[type="checkbox"]:checked + .toggle-label {
+    background: #2c3e50; 
+  }
+  
+  .dark-mode-toggle input[type="checkbox"]:checked + .toggle-label:after {
+    left: calc(100% - 2px);
+    transform: translateX(-100%);
+    background: #f1c40f; 
+  }
+
 
 
 .alert {
@@ -196,9 +233,11 @@ form button:hover {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    padding: 20px;
+    padding: 10px;
+    margin-top: 60px;
 }
+
+
 .card img {
     width: 100%;
     border-radius: 4px;
@@ -222,38 +261,8 @@ form button:hover {
     color: #007bff;
 }
 
-#chat-container {
 
-    max-width: 100%;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
 
-#chatbox {
-    padding: 10px;
-    overflow-y: auto;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
-}
-
-.chat-message-container {
-    display: flex;
-    align-items: flex-end;
-    margin-bottom: 10px;
-}
-
-.chat-message-container.bot {
-    justify-content: flex-start;
-}
-
-.chat-message-container.user {
-    justify-content: flex-end;
-}
 
 .avatar {
     width: 40px;
@@ -262,12 +271,8 @@ form button:hover {
     margin-right: 10px;
 }
 
-.chat-message {
-    padding: 8px 12px;
-    border-radius: 20px;
-    width: fit-content;
-    max-width: 80%;
-}
+
+
 
 .logo{
     width: 300px;
@@ -295,8 +300,7 @@ form button:hover {
 
 #send-button {
     border: none;
-    background: #333;
-    color: white;
+   
     padding: 15px;
     cursor: pointer;
     font-size: 16px;
@@ -308,4 +312,19 @@ form button:hover {
     width: 90%;
     margin-top: 70px;
     background-color: #759eff ;
+}
+
+
+@media(max-width: 768px){
+    .card {
+        width: 300px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        margin-top: auto;
+        margin: auto;
+        margin-right: auto;
+    }
+    
 }

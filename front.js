@@ -1,6 +1,8 @@
 
 
 
+
+
 const title = document.getElementById("title")
 const author = document.getElementById("author")
 const publisher = document.getElementById("publisher")
@@ -47,30 +49,57 @@ const httpRequestLivrosPost = async () => {
 
 
 
-const addlivro = document.querySelector(".addlivro")
+const addlivro = document.querySelector(".addlivros")
 addlivro.addEventListener("click", () => {
     cadastrarLivros()
 })
 
 
 const livroButtom = document.getElementById("search-button")
+const searchInput = document.getElementById("search-input")
+let livro
 const buscarDados = async () => {
-    const searchInput = document.getElementById("search-input")
     try {
         const httpGet = await fetch(`http://localhost:8080/dados:${searchInput.value}`)
         const dados = await httpGet.json()
         console.log(dados);
         const { autorLivro, capaLivro, editora, paginas, tituloLivro, sinopseLivro } = dados.dados
         mostrarDadosHtml(capaLivro,tituloLivro, autorLivro, editora, paginas, sinopseLivro   )
+        livro = searchInput.value
     } catch (error) {
         console.log(error);
     }
 }
 
+function avisoDeleteProduto() {
+    Swal.fire({
+        title: "Produto deletado",
+        text: "O livro foi deletado com sucesso.",
+        icon: "success"
+    });
+}
+
+const deletarButtom = document.querySelector(".deletarButtom")
+const deletarLivro = async() => {
+   try {
+    const data = await fetch(`http://localhost:8080/deletar:${livro}`, {
+        method: "DELETE"
+    })
+    const response =  await data.json()
+    avisoDeleteProduto();
+   } catch (error) {
+    console.log(error);
+   }
+}
+
+deletarButtom.addEventListener("click", () => {
+    deletarLivro()
+})
+
+
 const mostrarDadosHtml = (imagem, titulo, autor, editor, qtdpaginas, Sinopse) => {
     const img = document.querySelector(".imgLivro")
     const h2 = document.querySelector(".titleLivro")
-    console.log(h2);
     const autoMostrar = document.getElementById("autoMostrar")
     const editora = document.getElementById("editoraMostrar")
     const quantidadepaginas = document.getElementById("quantidadepaginas")
@@ -81,17 +110,6 @@ const mostrarDadosHtml = (imagem, titulo, autor, editor, qtdpaginas, Sinopse) =>
     editora.innerHTML = `Editora: ${editor}`
     quantidadepaginas.innerHTML = `Quantidade de Páginas: ${qtdpaginas}`
     sinopseLivro.innerHTML = `Sinopse: ${Sinopse}`
-}
-
-
-const chatBotApiRecomendarLivros = async() => {
-    const userinput = document.getElementById("user-input").value
-    
-    try {
-        
-    } catch (error) {
-        
-    }
 }
 
 

@@ -47,6 +47,17 @@ expressApi.get("/dados:dadoshttp", (req, response) => {
     }
 });
 
+expressApi.delete("/deletar:delete", (req, response) => {
+    try {
+        response.send({ status: "OK", msg: "dados deletados com sucesso." });
+        const dadosHtpp = req.params.delete.slice(1, Infinity)
+        console.log(dadosHtpp);
+    } catch (error) {
+        response.status(404).send({ error: "error 404" })
+    }
+})
+
+
 
 async function buscarLivro(dados) {
     try {
