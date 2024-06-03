@@ -112,6 +112,33 @@ const mostrarDadosHtml = (imagem, titulo, autor, editor, qtdpaginas, Sinopse) =>
     sinopseLivro.innerHTML = `Sinopse: ${Sinopse}`
 }
 
+const httpPostIa = async () => {
+    const userInput = document.getElementById("user-input")
+    const mensagemParaIa = {
+        mensagem: userInput.value
+    }
+    try {
+        const httpPostMensageIa = await fetch("http://localhost:8080/resposta", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(mensagemParaIa)
+        })
+        const dados = await httpPostMensageIa.json()
+        console.log(dados);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+const sendButton = document.querySelector(".send-button")
+sendButton.addEventListener("click", () => {
+    httpPostIa()
+})
+
+// const text = document.querySelector(".message bot-message")
 
 
 livroButtom.addEventListener("click", () => {

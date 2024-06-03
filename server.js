@@ -92,18 +92,39 @@ async function buscarLivro(dados) {
     }
 }
 
-async function recomendarLivros(gosto) {
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-  const prompt = `Oi Estou à procura de novas leituras e gostaria de recomendações 
-    personalizadas. 
-    Eu gosto muito de gêneros como, ${gosto}, apenas me mande os livros sem me perguntar mais nada`;
-  const result = await model.generateContent(prompt);
-  const response = await result.response;
-  const text = response.text();
-  console.log(text);
-}
+expressApi.post("/resposta", (req, response) => {
+    try {
+        const httpResponse = req.body.mensagem
+        console.log(httpResponse);
+        const dadosIa = recomendarLivros(httpResponse)
+        dadosIa.then(data => {
+            response.send({ status: "OK", responseData: data })
+        })
+    } catch (error) {
+        console.error("Error http 404")
+        response.status(400).send({error: "http bad request 400"})
+    }
+})
 
-recomendarLivros();
+
+const recomendarLivros = async (gosto) => {
+  try {
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const prompt = `Oi Estou à procura de novas leituras e gostaria de recomendações 
+      personalizadas. 
+      Eu gosto muito de gêneros como, ${gosto}, apenas me mande os livros sem me perguntar mais nada por favor`;
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+    console.log(text);
+    return text
+  } catch (error) {
+    gosto = "Nao foi possivel buscar seus livros."
+  }
+};
+
+
+
 
 const port = 8080;
 expressApi.listen(port, () => {
