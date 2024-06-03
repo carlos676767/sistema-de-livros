@@ -1,8 +1,4 @@
 
-
-
-
-
 const title = document.getElementById("title")
 const author = document.getElementById("author")
 const publisher = document.getElementById("publisher")
@@ -15,9 +11,9 @@ async function cadastrarLivros() {
     array.push(title.value, author.value, publisher.value, pages.value, capa.value, sinopse.value)
     for (let i = 0; i < array.length; i++) {
         if (array[i] == "") {
-          alert("vazio")
-          return
-        }else{
+            alert("vazio")
+            return
+        } else {
             httpRequestLivrosPost()
         }
     }
@@ -64,7 +60,7 @@ const buscarDados = async () => {
         const dados = await httpGet.json()
         console.log(dados);
         const { autorLivro, capaLivro, editora, paginas, tituloLivro, sinopseLivro } = dados.dados
-        mostrarDadosHtml(capaLivro,tituloLivro, autorLivro, editora, paginas, sinopseLivro   )
+        mostrarDadosHtml(capaLivro, tituloLivro, autorLivro, editora, paginas, sinopseLivro)
         livro = searchInput.value
     } catch (error) {
         console.log(error);
@@ -80,16 +76,16 @@ function avisoDeleteProduto() {
 }
 
 const deletarButtom = document.querySelector(".deletarButtom")
-const deletarLivro = async() => {
-   try {
-    const data = await fetch(`http://localhost:8080/deletar:${livro}`, {
-        method: "DELETE"
-    })
-    const response =  await data.json()
-    avisoDeleteProduto();
-   } catch (error) {
-    console.log(error);
-   }
+const deletarLivro = async () => {
+    try {
+        const data = await fetch(`http://localhost:8080/deletar:${livro}`, {
+            method: "DELETE"
+        })
+        const response = await data.json()
+        avisoDeleteProduto();
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 deletarButtom.addEventListener("click", () => {
@@ -112,7 +108,7 @@ const mostrarDadosHtml = (imagem, titulo, autor, editor, qtdpaginas, Sinopse) =>
     sinopseLivro.innerHTML = `Sinopse: ${Sinopse}`
 }
 
-const httpPostIa = async () => {
+const httpPostIa = async (callback) => {
     const userInput = document.getElementById("user-input")
     const mensagemParaIa = {
         mensagem: userInput.value
@@ -126,19 +122,33 @@ const httpPostIa = async () => {
             body: JSON.stringify(mensagemParaIa)
         })
         const dados = await httpPostMensageIa.json()
-        console.log(dados);
+        callback(dados)
     } catch (error) {
         console.log(error);
     }
 }
 
-
 const sendButton = document.querySelector(".send-button")
+
+const c
+const exibirTextoIaResposta = () => {
+    const text = document.createElement("p");
+    const chatBox = document.getElementById("chat-box")
+    text.id = "message bot-message";
+    text.className = "message bot-message";
+    httpPostIa((data) => {
+        const { responseData } = data;
+        const regex = /[#*]/g;
+        const retornarNovaString = responseData.replace(regex, "");
+        chatBox.appendChild(text)
+        text.innerHTML = retornarNovaString;
+    })
+}
 sendButton.addEventListener("click", () => {
-    httpPostIa()
+    exibirTextoIaResposta();
 })
 
-// const text = document.querySelector(".message bot-message")
+
 
 
 livroButtom.addEventListener("click", () => {
