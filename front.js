@@ -82,6 +82,18 @@ const mostrarDadosHtml = (imagem, titulo, autor, editor, qtdpaginas, Sinopse) =>
     sinopseLivro.innerHTML = `Sinopse: ${Sinopse}`
 }
 
+
+const chatBotApiRecomendarLivros = async() => {
+    const userinput = document.getElementById("user-input").value
+    
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
+
 livroButtom.addEventListener("click", () => {
     buscarDados()
 })
