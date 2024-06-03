@@ -60,22 +60,26 @@ const buscarDados = async () => {
         const httpGet = await fetch(`http://localhost:8080/dados:${searchInput.value}`)
         const dados = await httpGet.json()
         console.log(dados);
-        const { autorLivro, capaLivro, editora, paginas, tituloLivro } = dados.dados
-        mostrarDadosHtml(capaLivro,tituloLivro, autorLivro, editora )
+        const { autorLivro, capaLivro, editora, paginas, tituloLivro, sinopseLivro } = dados.dados
+        mostrarDadosHtml(capaLivro,tituloLivro, autorLivro, editora, paginas, sinopseLivro   )
     } catch (error) {
         console.log(error);
     }
 }
 
-const mostrarDadosHtml = (imagem, titulo, autor, editor) => {
+const mostrarDadosHtml = (imagem, titulo, autor, editor, qtdpaginas, Sinopse) => {
     const img = document.querySelector("img")
     const h2 = document.querySelectorAll("h2")[2]
     const autoMostrar = document.getElementById("autoMostrar")
     const editora = document.getElementById("editoraMostrar")
+    const quantidadepaginas = document.getElementById("quantidadepaginas")
+    const sinopseLivro = document.getElementById("sinopseLivro")
     img.src = imagem
     h2.innerHTML = titulo
     autoMostrar.innerHTML = `Autor: ${autor}`
     editora.innerHTML = `Editora: ${editor}`
+    quantidadepaginas.innerHTML = `Quantidade de Páginas: ${qtdpaginas}`
+    sinopseLivro.innerHTML = `Sinopse: ${Sinopse}`
 }
 
 livroButtom.addEventListener("click", () => {

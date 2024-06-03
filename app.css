@@ -96,7 +96,6 @@ form button:hover {
 }
 
 .book {
-    
     border: 1px solid #ccc;
     border-radius: 5px;
     margin: 1rem;
@@ -164,6 +163,7 @@ body {
     width: 100%;
     border-radius: 4px;
     margin-bottom: 10px;
+    object-fit: cover;
 }
 .card h2 {
     margin-top: 0;
