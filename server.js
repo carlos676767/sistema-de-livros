@@ -17,7 +17,6 @@ expressApi.post("/cadastro", (req, resposta) => {
     }
 })
 
-
 const url = `mongodb+srv://admin:${process.env.DATABASE_PASS}@dados.7d94myt.mongodb.net/?retryWrites=true&w=majority&appName=dados`
 const client = new MongoClient(url);
 const dataBaseConnect = async (dados) => {
@@ -34,7 +33,6 @@ const dataBaseConnect = async (dados) => {
         }, 10000);
     }
 }
-
 
 
 expressApi.get("/dados:dadoshttp", (req, response) => {
@@ -69,3 +67,6 @@ const port = 8080
 expressApi.listen(port, () => {
     console.log(`Server running on the port ${port}...`);
 })
+
+
+
