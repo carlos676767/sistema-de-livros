@@ -14,7 +14,7 @@ async function cadastrarLivros() {
     const array = []
     array.push(title.value, author.value, publisher.value, pages.value, capa.value, sinopse.value)
     for (let i = 0; i < array.length; i++) {
-        if (array[i] =="") {
+        if (array[i] == "") {
           alert("vazio")
           return
         }else{
