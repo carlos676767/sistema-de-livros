@@ -83,6 +83,7 @@ const deletarLivro = async () => {
         })
         const response = await data.json()
         avisoDeleteProduto();
+        mostrarDadosHtml("", "", "", "", "", "")
     } catch (error) {
         console.log(error);
     }
@@ -91,7 +92,6 @@ const deletarLivro = async () => {
 deletarButtom.addEventListener("click", () => {
     deletarLivro()
 })
-
 
 const mostrarDadosHtml = (imagem, titulo, autor, editor, qtdpaginas, Sinopse) => {
     const img = document.querySelector(".imgLivro")
@@ -130,25 +130,26 @@ const httpPostIa = async (callback) => {
 
 const sendButton = document.querySelector(".send-button")
 
-const c
+const createElementsDiv = () => {
+    const chatBox = document.getElementById("chat-box")
+    return chatBox
+}
+
 const exibirTextoIaResposta = () => {
     const text = document.createElement("p");
-    const chatBox = document.getElementById("chat-box")
     text.id = "message bot-message";
     text.className = "message bot-message";
     httpPostIa((data) => {
         const { responseData } = data;
         const regex = /[#*]/g;
         const retornarNovaString = responseData.replace(regex, "");
-        chatBox.appendChild(text)
+        createElementsDiv().appendChild(text)
         text.innerHTML = retornarNovaString;
     })
 }
 sendButton.addEventListener("click", () => {
     exibirTextoIaResposta();
 })
-
-
 
 
 livroButtom.addEventListener("click", () => {

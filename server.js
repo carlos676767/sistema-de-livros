@@ -95,7 +95,6 @@ async function buscarLivro(dados) {
 expressApi.post("/resposta", (req, response) => {
     try {
         const httpResponse = req.body.mensagem
-        console.log(httpResponse);
         const dadosIa = recomendarLivros(httpResponse)
         dadosIa.then(data => {
             response.send({ status: "OK", responseData: data })
