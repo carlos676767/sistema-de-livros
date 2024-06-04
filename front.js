@@ -151,7 +151,33 @@ sendButton.addEventListener("click", () => {
     exibirTextoIaResposta();
 })
 
+const dialog = document.querySelector("dialog")
+const abrirDialog = () => {
+    dialog.showModal()
+}
+
+const btnRecomendarLivro = document.getElementById("btnRecomendarLivro")
+btnRecomendarLivro.addEventListener("click", () => {
+    abrirDialog()
+})
+
+const btnCloser = document.querySelector(".btn-closer")
+btnCloser.addEventListener("click", () => {
+    dialog.close()
+})
+
 
 livroButtom.addEventListener("click", () => {
     buscarDados()
 })
+
+const darkMode = (corFundo, corLetra) => {
+    const htmlElementos = document.querySelectorAll("*")
+    htmlElementos.forEach(elementoHtml => {
+        console.log(elementoHtml);
+        elementoHtml.style.backgroundColor = corFundo
+        elementoHtml.style.color = corLetra
+    })
+}
+
+// darkMode()
