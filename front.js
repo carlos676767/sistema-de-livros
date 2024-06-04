@@ -174,10 +174,30 @@ livroButtom.addEventListener("click", () => {
 const darkMode = (corFundo, corLetra) => {
     const htmlElementos = document.querySelectorAll("*")
     htmlElementos.forEach(elementoHtml => {
-        console.log(elementoHtml);
         elementoHtml.style.backgroundColor = corFundo
         elementoHtml.style.color = corLetra
     })
 }
 
-// darkMode()
+const toggleLabel = document.getElementById("dark-mode-toggle")
+const aplicarDarkMode = () => {
+    if (toggleLabel.checked) {
+        localStorage.setItem("cores", darkMode("rgba(0, 0, 0, 0.5)", 'white'))
+    }else{
+        localStorage.setItem("cores", darkMode("", ''))
+    }
+} 
+
+const salvarDarkModeLocal = () => {
+    const recuperarDarkMode = localStorage.getItem("cores")
+    console.log(recuperarDarkMode);
+    if (recuperarDarkMode) {
+        darkMode("rgba(0, 0, 0, 0.5)", 'white')
+    }else{
+        darkMode("#759eff", 'white')
+    }
+}
+salvarDarkModeLocal()
+toggleLabel.addEventListener("click", () => [
+    aplicarDarkMode()
+])

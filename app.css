@@ -15,7 +15,9 @@
 .custom-navbar .navbar-toggler-icon {
     color: #ffffff !important;
 }
-
+body {
+    transition: background-color 0.5s ease, color 0.5s ease; 
+}
 .custom-navbar .nav-link:hover {
     color: #cccccc !important; 
 }
