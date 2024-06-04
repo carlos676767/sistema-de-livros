@@ -35,6 +35,11 @@ body {
 }
 
 
+.limitar{
+    width: 200px;
+    overflow: hidden;
+    overflow: auto;
+}
 
 
 body {
@@ -133,7 +138,17 @@ section {
 }
 
 
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    grid-gap: 20px;
+    padding: 20px;
+}
 
+.grid-item {
+    border: 1px solid #ccc;
+    padding: 15px;
+}
 
 
 #library {
@@ -143,7 +158,9 @@ section {
 
 main{
     display: flex;
-  
+    width: 1000px;
+    overflow: hidden;
+    overflow: scroll;
 }
 
 .list{
@@ -417,4 +434,23 @@ dialog{
     color: white;
     border: none;
     cursor: pointer;
+}
+
+@media(max-width: 768px){
+    .grid-container {
+        display: grid;
+        flex-wrap:wrap ;
+        grid-template-columns: auto; 
+    }
+    .card{
+        display: flex;
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #add-book-section{
+        margin-left: auto;
+        margin-right: auto;
+        height: auto;
+    }
 }

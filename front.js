@@ -129,7 +129,6 @@ const httpPostIa = async (callback) => {
 }
 
 const sendButton = document.querySelector(".send-button")
-
 const createElementsDiv = () => {
     const chatBox = document.getElementById("chat-box")
     return chatBox
@@ -171,33 +170,70 @@ livroButtom.addEventListener("click", () => {
     buscarDados()
 })
 
-const darkMode = (corFundo, corLetra) => {
-    const htmlElementos = document.querySelectorAll("*")
-    htmlElementos.forEach(elementoHtml => {
-        elementoHtml.style.backgroundColor = corFundo
-        elementoHtml.style.color = corLetra
-    })
-}
 
-const toggleLabel = document.getElementById("dark-mode-toggle")
-const aplicarDarkMode = () => {
-    if (toggleLabel.checked) {
-        localStorage.setItem("cores", darkMode("rgba(0, 0, 0, 0.5)", 'white'))
-    }else{
-        localStorage.setItem("cores", darkMode("", ''))
-    }
-} 
 
-const salvarDarkModeLocal = () => {
-    const recuperarDarkMode = localStorage.getItem("cores")
-    console.log(recuperarDarkMode);
-    if (recuperarDarkMode) {
-        darkMode("rgba(0, 0, 0, 0.5)", 'white')
-    }else{
-        darkMode("#759eff", 'white')
+const pegarLivrosApi = async () => {
+    try {
+        const data = await fetch("http://localhost:8080/livrosMostrar");
+        const response = await data.json()
+        const percorrerLivros = response.livros.map((livros) => {
+            const { autorLivro, capaLivro, editora, paginas, tituloLivro, sinopseLivro } = livros
+            mostrarLivros( capaLivro, tituloLivro, autorLivro, editora,paginas, sinopseLivro)
+        })
+    } catch (error) {
+        console.log(error);
     }
 }
-salvarDarkModeLocal()
-toggleLabel.addEventListener("click", () => [
-    aplicarDarkMode()
-])
+
+pegarLivrosApi()
+
+
+function mostrarLivros( capaLivro, tituloLivro, autorLivro, editora,paginas, sinopseLivro) {
+  const div = document.createElement("div");
+  const main = document.querySelector("main");
+  div.className = "grid-item";
+  div.innerHTML = `<div class="card">
+   <img src=${capaLivro} alt="Capa do Livro" class="imgLivro">
+   <h2 class="titleLivro"}>${tituloLivro}</h2>
+   <p id="autoMostrar">Autor: ${autorLivro}</p>
+   <p id="editoraMostrar">Editora: ${editora}</p>
+   <p id="quantidadepaginas">Quantidade de Páginas: ${paginas}</p>
+   <p id="sinopseLivro">Sinopse: ${sinopseLivro}</p> 
+</div>`;
+  main.appendChild(div);
+}
+
+// const darkMode = (corFundo, corLetra) => {
+//     const htmlElementos = document.querySelectorAll("*")
+//     htmlElementos.forEach(elementoHtml => {
+//         elementoHtml.style.backgroundColor = corFundo
+//         elementoHtml.style.color = corLetra
+//     })
+// }
+
+// const toggleLabel = document.getElementById("dark-mode-toggle")
+// const aplicarDarkMode = () => {
+//     if (toggleLabel.checked) {
+//         localStorage.setItem("cores", darkMode("rgba(0, 0, 0, 0.5)", 'white'))
+//     }else{
+//         localStorage.setItem("cores", darkMode("", ''))
+//     }
+// }
+
+// const salvarDarkModeLocal = () => {
+//     const recuperarDarkMode = localStorage.getItem("cores")
+//     console.log(recuperarDarkMode);
+//     if (recuperarDarkMode) {
+//         darkMode("rgba(0, 0, 0, 0.5)", 'white')
+//     }else{
+//         darkMode("#759eff", 'white')
+//     }
+// }
+
+// salvarDarkModeLocal()
+// toggleLabel.addEventListener("click", () => [
+//     aplicarDarkMode()
+// ])
+
+
+

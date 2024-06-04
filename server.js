@@ -115,15 +115,37 @@ const recomendarLivros = async (gosto) => {
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
-    console.log(text);
     return text
   } catch (error) {
     gosto = "Nao foi possivel buscar seus livros."
   }
 };
 
+expressApi.get("/livrosMostrar", async(req, resposta) => {
+    try {
+        const dadosApi = await buscarLivros()
+        resposta.send({livros: dadosApi, status: "200"})
+    } catch (error) {
+        resposta.status(200).send({erro:  "http bad request 400"})
+    }
+})
 
 
+//mexer aqui
+async function buscarLivros() {
+    try {
+        await client.connect();
+        const dataBaseName = client.db("database");
+        const collection = dataBaseName.collection("database");
+       const dados = await collection.find().toArray()
+       console.log(dados);
+       return dados
+    } catch (error) {
+        console.error("Ocorreu um erro ao buscar seus livros");
+    } finally {
+        client.close();
+    }
+}
 
 const port = 8080;
 expressApi.listen(port, () => {
